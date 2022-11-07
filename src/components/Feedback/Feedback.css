@@ -1,0 +1,25 @@
+.feedback {
+  display: block;
+  width: 350px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(to bottom right, green, rgb(154, 180, 40));
+  padding: 15px;
+}
+
+button {
+  width: 70px;
+  height: 40px;
+}
+
+button:not(:last-child) {
+  margin-right: 10px;
+}
+
+.Statistics {
+  display: flex;
+  flex-direction: column;
+}
