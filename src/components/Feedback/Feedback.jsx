@@ -1,9 +1,9 @@
-import Statistics from "components/Statistics/Statistics";
-import React from "react";
-import { FeedbackOptions } from "components/FeedbackOptions/FeedbackOptions";
-import { Notification } from "components/Notification/Notification";
-import "components/Feedback/Feedback.css";
-import { Section } from "components/Section/Section";
+import Statistics from 'components/Statistics/Statistics';
+import React from 'react';
+import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
+import { Notification } from 'components/Notification/Notification';
+import 'components/Feedback/Feedback.css';
+import { Section } from 'components/Section/Section';
 
 class Feedback extends React.Component {
   state = {
@@ -12,34 +12,10 @@ class Feedback extends React.Component {
     bad: 0,
   };
 
-  onClickBtn = (event) =>
-    this.setState((prevState) => ({
+  onClickBtn = event =>
+    this.setState(prevState => ({
       [event.target.name]: prevState[event.target.name] + 1,
     }));
-
-  goodFeedback = () => {
-    this.setState((prevState) => {
-      return {
-        good: prevState.good + 1,
-      };
-    });
-  };
-
-  neutralFeedback = () => {
-    this.setState((prevState) => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
-  };
-
-  badFeedback = () => {
-    this.setState((prevState) => {
-      return {
-        bad: prevState.bad + 1,
-      };
-    });
-  };
 
   total = () => {
     return this.state.good + this.state.neutral + this.state.bad;
