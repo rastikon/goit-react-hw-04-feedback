@@ -4,7 +4,6 @@ import FeedbackOptions from 'components/FeedbackOptions/FeedbackOptions';
 import { Notification } from 'components/Notification/Notification';
 import 'components/Feedback/Feedback.css';
 import { Section } from 'components/Section/Section';
-import { type } from '@testing-library/user-event/dist/type';
 
 const Feedback = () => {
   const [good, setGood] = useState(0);
