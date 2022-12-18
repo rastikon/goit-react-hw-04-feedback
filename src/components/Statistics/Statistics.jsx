@@ -1,5 +1,5 @@
-import React from "react";
-import "components/Statistics/Statistics.css";
+import React from 'react';
+import 'components/Statistics/Statistics.css';
 
 export const Statistics = ({
   good,

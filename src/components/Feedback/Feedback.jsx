@@ -1,55 +1,62 @@
 import Statistics from 'components/Statistics/Statistics';
-import React from 'react';
-import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
+import { useState } from 'react';
+import FeedbackOptions from 'components/FeedbackOptions/FeedbackOptions';
 import { Notification } from 'components/Notification/Notification';
 import 'components/Feedback/Feedback.css';
 import { Section } from 'components/Section/Section';
+import { type } from '@testing-library/user-event/dist/type';
 
-class Feedback extends React.Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+const Feedback = () => {
+  const [good, setGood] = useState(0);
+  const [bad, setBad] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+
+  const options = { good: 'good', neutral: 'neutral', bad: 'bad' };
+
+  const onLeaveFeedback = options => {
+    switch (options) {
+      case 'good':
+        setGood(good + 1);
+        break;
+      case 'bad':
+        setBad(bad + 1);
+        break;
+      case 'neutral':
+        setNeutral(neutral + 1);
+        break;
+      default:
+        throw new Error(`Unkowns feedback type - ${options}`);
+    }
   };
 
-  onClickBtn = event =>
-    this.setState(prevState => ({
-      [event.target.name]: prevState[event.target.name] + 1,
-    }));
-
-  total = () => {
-    return this.state.good + this.state.neutral + this.state.bad;
+  const total = () => {
+    return good + neutral + bad;
   };
 
-  positivePercentage = () => {
-    return parseInt((this.state.good * 100) / this.total());
+  const positivePercentage = () => {
+    return parseInt((good * 100) / total());
   };
 
-  render() {
-    return (
-      <div className="feedback">
-        <Section title="Please leave feedback">
-          <FeedbackOptions
-            options={this.state}
-            onLeaveFeedback={this.onClickBtn}
+  return (
+    <div className="feedback">
+      <Section title="Please leave feedback">
+        <FeedbackOptions options={options} onLeaveFeedback={onLeaveFeedback} />
+      </Section>
+      <Section title="Statistics">
+        {total() ? (
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total()}
+            positivePercentage={positivePercentage()}
           />
-        </Section>
-        <Section title="Statistics">
-          {this.total() ? (
-            <Statistics
-              good={this.state.good}
-              neutral={this.state.neutral}
-              bad={this.state.bad}
-              total={this.total()}
-              positivePercentage={this.positivePercentage()}
-            />
-          ) : (
-            <Notification message="There is no feedback" />
-          )}
-        </Section>
-      </div>
-    );
-  }
-}
+        ) : (
+          <Notification message="There is no feedback" />
+        )}
+      </Section>
+    </div>
+  );
+};
 
 export default Feedback;
